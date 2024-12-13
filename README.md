@@ -22,7 +22,7 @@ Produces three datasets containing measures of extreme temperatures (hot and col
 - Run script xx to generate TEEwave dataset 
 
 ## R environment
-
+```
 R version 4.4.1 (2024-06-14)
 Platform: x86_64-pc-linux-gnu
 Running under: AlmaLinux 8.10 (Cerulean Leopard)
@@ -53,4 +53,6 @@ loaded via a namespace (and not attached):
 [22] units_0.8-5        munsell_0.5.1      withr_3.0.0        tools_4.4.1        raster_3.6-26      tzdb_0.4.0         colorspace_2.1-0  
 [29] vctrs_0.6.5        R6_2.5.1           zoo_1.8-12         proxy_0.4-27       lifecycle_1.0.4    classInt_0.4-10    pkgconfig_2.0.3   
 [36] pillar_1.9.0       gtable_0.3.5       glue_1.7.0         Rcpp_1.0.13        tidyselect_1.2.1   rstudioapi_0.16.0  farver_2.1.2      
-[43] wk_0.9.1           compiler_4.4.1     sp_2.1-3          
+[43] wk_0.9.1           compiler_4.4.1     sp_2.1-3
+
+```          
