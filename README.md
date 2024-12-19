@@ -4,8 +4,7 @@ Code for generating the TEE: temperature extremes in Europe dataset.
 ## Abstract
 
 ---
-abstract here .....
-
+We generate datasets quantifying extreme temperature exposure in Europe using a variety of metrics at two sub-national spatial scales (NUTS 2 and NUTS 3) and two temporal scales (daily and yearly) from 1980-2022. These datasets capture the breadth of temperature metrics used in epidemiology, demography and environmental literature with $6$ different metrics: including regionally-unusual temperature events (defined as temperatures above/below the $95^{th}$/$5^{th}$ percentile of historical temperatures) and periods of sustained (consecutive day) exposure to extreme temperatures. Although publicly available, climate data format and spatial resolution rarely matches the format, scale, and extent used to disseminate government statistics on health, economic, and demographic variables, and manipulating raw data is computationally expensive. Here we provide temperature data in a user-friendly format which can easily be linked to EuroStat. Our open-sourced code and reproducible methods can be extended to produce similar datasets at the global scale. 
 ---
 
 ## Code description
@@ -16,10 +15,24 @@ Produces three datasets containing measures of extreme temperatures (hot and col
 # Replication notes:
 
 ## Steps
-- Download data and save in Data folder
-- Run script xx to process raster files and generate daily temperature measures (TEEdaily)
-- Run the following scripts to compute yearly temperature measures (TEEyearly):
-- Run script xx to generate TEEwave dataset 
+- Download raw data from the publicly available repositories and save in Data folder
+- Run scripts in folder `01_rastercessing/` to process raster files and generate daily temperature measures (TEEdaily)
+- Run the following scripts in folder `02_metricconstruction/` to compute yearly temperature measures (used in TEEyearly):
+```
+"METRIC-cdd.R"                                "METRIC-expected_daysoverthreshold.R"        
+"METRIC-extremetempwavedays_global.R"         "METRIC-extremetempwavedays_local.R"         
+"METRIC-percentilethresholdtemp_days_local.R" "METRIC-tropicalnights.R"                    
+"METRIC-utci.R"
+```
+- Run scripts in folder `03_compiledataset` to generate final datasets for TEE-daily, TEE-yearly, and TEE-wave
+
+## Raw data
+Raw climate data is available from the (Copernicus Data Store)[https://cds.climate.copernicus.eu/] 
+
+Shapefile polygons delineating the European NUTS regions are available from (EuroStat)[https://ec.europa.eu/eurostat/web/gisco/geodata/statistical-units/territorial-units-statistics] 
+
+Gridded population estimates were produced by the Center For International Earth Science Information Network available at the (Gridded Population of the World, Version 4 (GPWv4): Population Count, Revision 11)[https://doi.org/10.7927/H4JW8BX5] 
+
 
 ## R environment
 ```
