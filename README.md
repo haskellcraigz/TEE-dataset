@@ -18,7 +18,7 @@ Produces three datasets containing measures of extreme temperatures (hot and col
 
 ## Steps
 - Download raw data from the publicly available repositories and save in Data folder
-- Run scripts in folder `01_rastercessing/` to process raster files and generate daily temperature measures (TEEdaily)
+- Run scripts in folder `01_rasterprocessing/` to process raster files and generate daily temperature measures (TEEdaily)
 - Run the following scripts in folder `02_metricconstruction/` to compute yearly temperature measures (used in TEEyearly):
 ```
 "METRIC-cdd.R"                                "METRIC-expected_daysoverthreshold.R"        
