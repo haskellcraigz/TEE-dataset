@@ -1,6 +1,6 @@
 ###############################################
 # Constructing Cooling and Heating Degree Days (CDD/HDD)
-# Date Last Updated: Dec 13 2024
+# Date Last Updated: May 16 2025
 ################################################
 ## NOTES:
 ## Following Carr (2024), De Rosa (2015) and the US national weather service 
@@ -9,22 +9,22 @@
 ## Note - this metric is used particularly when considering the impact of
 ## temperature on energy use/the electrical grid
 
-# set working directory to location of TEEFiles folder
-# setwd()
+# set working directory to TEE-dataset-main folder
+setwd("")
 
 # Packages [FILE PATH TO BE UPDATED IN FINAL REPO] -------------------
 library(tidyverse)
 
 # Load data [FILE PATH TO BE UPDATED IN FINAL REPO] --------------------
 ## NUTS3
-data_nuts3 <- read_csv("~/TEEDataset/data/02_metrics/dailytemp_nuts3.csv")
+data_nuts3 <- read_csv("data/02_metrics/dailytemp_nuts3.csv")
 # making year variable
 data_nuts3 <- data_nuts3 %>% 
   mutate(year = str_sub(date, 1, 4))
 
 
 ##NUTS2
-data_nuts2 <- read_csv("~/TEEDataset/data/02_metrics/dailytemp_nuts2.csv")
+data_nuts2 <- read_csv("data/02_metrics/dailytemp_nuts2.csv")
 # making year variable
 data_nuts2 <- data_nuts2 %>% 
   mutate(year = str_sub(date, 1, 4))
@@ -37,11 +37,11 @@ cdd_thresh <- 24
 hdd_thresh <- 20
 
 # first year of data period
-first_year <- 1979
+first_year <- 1980
 
 # export file paths
-export_nuts2 <- "~/TEEDataset/data/02_metrics/cdd_nuts2.csv"
-export_nuts3 <- "~/TEEDataset/data/02_metrics/cdd_nuts3.csv"
+export_nuts2 <- "data/02_metrics/cdd_nuts2.csv"
+export_nuts3 <- "data/02_metrics/cdd_nuts3.csv"
 
 # Compute metric -------------
 # difference between mean temperature and threshold

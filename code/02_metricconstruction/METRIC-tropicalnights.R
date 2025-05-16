@@ -1,25 +1,28 @@
 ###############################################
 # Data Paper - Tropical Nights/Polar Days
-# Date Last Modified: Dec 13 2024
+# Date Last Modified: May 16 2025
 ################################################
 # NOTES: Following Medina-Ramon (2007), Mills(2015) and the EEA publication on extreme 
 # heat indices, we define "Tropical Nights" as a minimum temperature above 20*C 
 # [and polar days as the maximum temperature below 10* C]
 # Note that EEA suggest this index as relevant mainly for the health sector
 
-# Packages [FILE PATH TO BE UPDATED IN FINAL REPO] -------------------
+# Packages -------------------
 library(tidyverse)
 library(zoo)
 
+# set working directory to TEE-dataset-main folder
+setwd("")
+
 # Load data [FILE PATH TO BE UPDATED IN FINAL REPO] --------------------
 ## NUTS3
-data_nuts3 <- read_csv("~/TEEDataset/data/02_metrics/dailytemp_nuts3.csv")
+data_nuts3 <- read_csv("data/02_metrics/dailytemp_nuts3.csv")
 data_nuts3 <- data_nuts3 %>% 
   mutate(year = str_sub(date, 1, 4))
 
 
 ##NUTS2
-data_nuts2 <- read_csv("~/TEEDataset/data/02_metrics/dailytemp_nuts2.csv")
+data_nuts2 <- read_csv("data/02_metrics/dailytemp_nuts2.csv")
 # making year variable
 data_nuts2 <- data_nuts2 %>% 
   mutate(year = str_sub(date, 1, 4))
@@ -30,11 +33,11 @@ tn_thresh <- 20
 pd_thresh <- 10
 
 # first year of data period
-first_year <- 1979
+first_year <- 1980
 
 # export paths
-export_nuts2 <- "~/TEEDataset/data/02_metrics/tropicalnights_nuts2.csv"
-export_nuts3 <- "~/TEEDataset/data/02_metrics/tropicalnights_nuts3.csv"
+export_nuts2 <- "data/02_metrics/tropicalnights_nuts2.csv"
+export_nuts3 <- "data/02_metrics/tropicalnights_nuts3.csv"
 
 
 # Compute metric -------------

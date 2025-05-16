@@ -1,14 +1,14 @@
 ###############################################
 # Constructing Extreme Temperature Waves using Global Threshold
-# Date Last Modified: Dec 13 2024
+# Date Last Modified: May 16 2025
 ################################################
 # NOTES: Reference period can be adjusted by user. Last year of reference period
 # can be set manually under `Set hardcoded thresholds`. If the first year of the 
 # reference period needs to be adjusted, user can filter the dataset before
 # applying the functions
 
-# set working directory to location of TEEFiles folder
-# setwd()
+# set working directory to TEE-dataset-main folder
+setwd("")
 
 # Packages -------------------
 library(tidyverse)
@@ -16,14 +16,14 @@ library(zoo)
 
 # Load data --------------------
 ## NUTS3
-data_nuts3 <- read_csv("~/TEEDataset/data/02_metrics/dailytemp_nuts3.csv")
+data_nuts3 <- read_csv("data/02_metrics/dailytemp_nuts3.csv")
 # making year variable
 data_nuts3 <- data_nuts3 %>% 
   mutate(year = str_sub(date, 1, 4))
 
 
 ##NUTS2
-data_nuts2 <- read_csv("~/TEEDataset/data/02_metrics/dailytemp_nuts2.csv")
+data_nuts2 <- read_csv("data/02_metrics/dailytemp_nuts2.csv")
 # making year variable
 data_nuts2 <- data_nuts2 %>% 
   mutate(year = str_sub(date, 1, 4))
@@ -40,11 +40,11 @@ coldtemp_val <- c(-10, 0, 10)
 ref_year <- 1990
 
 #first year of data period
-first_year <- 1979
+first_year <- 1980
 
 # export filepaths
-export_nuts2 <- "~/TEEDataset/data/02_metrics/wave_global_nuts2.csv"
-export_nuts3 <- "~/TEEDataset/data/02_metrics/wave_global_nuts3.csv"
+export_nuts2 <- "data/02_metrics/wave_global_nuts2.csv"
+export_nuts3 <- "data/02_metrics/wave_global_nuts3.csv"
 
 # Filter data to only observations after reference period -----------
 
@@ -278,5 +278,5 @@ wave_nuts3 <- remove_rownames(wave_nuts3)
 
 ### save ----------------------------
 write_csv(wave_nuts3, file = export_nuts3)
-
+ 
 

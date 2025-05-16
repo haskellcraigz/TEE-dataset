@@ -1,6 +1,6 @@
 ############################################
 ## Batch processing daily UTCI min, mean, and max 1979-2021
-## Last Updated: Dec 13 2024
+## Last Updated: May 16 2025
 #################################################
 ## NOTES: 
 
@@ -9,8 +9,8 @@
 # ---------------------------------------------------------------------------- #
 
 # --- set working directory
-# set working directory to location of TEEFiles folder
-# setwd()
+# set working directory to TEE-dataset-main folder
+setwd()
 
 # -- libraries
 # raster packages
@@ -25,16 +25,13 @@ library(tidyverse)
 require(foreign)
 library(lubridate)
 
-# -- setwd to code folder
-# setwd("")
-
 
 # -- load shapefile
 # download nuts files located in data/01_rawdata/nuts/:
-spdf <- st_read("")
+spdf <- st_read("data/01_rawdata/nuts/NUTS_RG_10M_2021_4326.shp")
 
 # -- load raster data
-nc_files.lst <- list.files(path = "~/data/rawdata/utci/", 
+nc_files.lst <- list.files(path = "data/01_rawdata/utci/", 
                            pattern = "\\.nc$", full.names = TRUE)
 
 
@@ -42,11 +39,11 @@ nc_files.lst <- list.files(path = "~/data/rawdata/utci/",
 
 # time frame
 startdate <- "1979-01-01"
-enddate <- "2020-12-31"
+enddate <- "2024-12-31"
 
 # filepaths
-export_nuts2 <- "~/data/02_metrics/dailyutci_nuts2.csv"
-export_nuts3 <- "~/data/02_metrics/dailyutci_nuts3.csv"
+export_nuts2 <- "data/02_metrics/dailyutci_nuts2.csv"
+export_nuts3 <- "data/02_metrics/dailyutci_nuts3.csv"
 
 # ---------------------------------------------------------------------------- #
 ## Step 1: Subset Shapefile Regions -------------------------------------------
@@ -84,9 +81,9 @@ for (nc_file in nc_files.lst) {
   # Step 2: Assign dates to raster layers
 
   # - Create a sequence of dates for entire file period to feed to raster data
-  startdate <- if_else(str_sub(basename(nc_file), 16, 18) == "avg",
+  startdate <- if_else(str_sub(basename(nc_file), 6, 8) == "avg",
                        "1980-01-01", startdate)
-  
+
   dates <- seq(as.Date(startdate, "%Y-%m-%d"), as.Date(enddate, "%Y-%m-%d"), by = "day")
   
   # - Add the dates to raster
@@ -100,7 +97,7 @@ for (nc_file in nc_files.lst) {
   
   # Step 4: Generate a unique filename for each .nc file's output
   nc_file_name <- basename(nc_file)
-  new_file_name <- paste0(substr(nc_file_name, 16, 18), ".csv")
+  new_file_name <- paste0(substr(nc_file_name, 6, 8), ".csv")
   
   # Step 5: Compute spatial mean
   extracted <- exact_extract(raster, spdf_crs, 'mean', 
@@ -184,7 +181,7 @@ for (nc_file in nc_files.lst) {
   # Step 2: Assign dates to raster layers
   
   # - Create a sequence of dates for entire file period to feed to raster data
-  startdate <- if_else(str_sub(basename(nc_file), 16, 18) == "avg",
+  startdate <- if_else(str_sub(basename(nc_file), 6, 8) == "avg",
                        "1980-01-01", startdate)
   
   dates <- seq(as.Date(startdate, "%Y-%m-%d"), as.Date(enddate, "%Y-%m-%d"), by = "day")
@@ -200,7 +197,7 @@ for (nc_file in nc_files.lst) {
   
   # Step 4: Generate a unique filename for each .nc file's output
   nc_file_name <- basename(nc_file)
-  new_file_name <- paste0(substr(nc_file_name, 16, 18), ".csv")
+  new_file_name <- paste0(substr(nc_file_name, 6, 8), ".csv")
   
   # Step 5: Compute spatial mean
   extracted <- exact_extract(raster, spdf_crs, 'mean', 

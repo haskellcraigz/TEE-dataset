@@ -1,6 +1,6 @@
 #########################################################
 # Pop. weighted batch processing daily temp min, mean, and max 1950-2023 
-# Last Updated: Dec 13 2024
+# Last Updated: May 16 2025
 ############################################################
 ## NOTES: see GPW_v4 contents file for explanation of each layer
 
@@ -8,8 +8,8 @@
 # Set-up ----------------------------------------------------------------------
 # ---------------------------------------------------------------------------- #
 
-# set working directory to location of TEEFiles folder
-# setwd()
+# set working directory to TEE-dataset-main folder
+setwd()
 
 # --- libraries
 
@@ -33,26 +33,26 @@ library(lubridate)
 
 # years of the temperature raster data
 startdate <- "1950-01-01"
-enddate <- "2022-06-30"
+enddate <- "2024-12-31"
 
 # export file paths
-export_nuts2 <- "~/data/02_metrics/dailypoptemp_nuts2.csv"
-export_nuts3 <- "~/data/02_metrics/dailypoptemp_nuts3.csv"
+export_nuts2 <- "data/02_metrics/dailypoptemp_nuts2.csv"
+export_nuts3 <- "data/02_metrics/dailypoptemp_nuts3.csv"
 
 # Load data and file names  -------------------
 
 ## load nuts shapefiles --------------
 # download nuts files located in data/01_rawdata/nuts/:
-spdf <- st_read("")
+spdf <- st_read("data/01_rawdata/nuts/NUTS_RG_10M_2021_4326.shp")
 
 ## load raster files -----------------
 
 # temperature rasters
-nc_files.lst <- list.files(path = "~/data/01_rawdata/dailytemp/", 
+nc_files.lst <- list.files(path = "data/01_rawdata/dailytemp/", 
                            pattern = "\\.nc$", full.names = TRUE)
 
 # population by year in data/rawdata/pop
-pop_file_path <- list.files(path = "~/data/01_rawdata/pop/", 
+pop_file_path <- list.files(path = "data/01_rawdata/pop/", 
                             pattern = "\\.nc$", full.names = TRUE)
 
 
@@ -176,42 +176,42 @@ for (nc_file in nc_files.lst) {
   
   # Generate a unique filename for each .nc file's output (min, max, mean)
   nc_file_name <- basename(nc_file)
-  new_file_name <- paste0(substr(nc_file_name, 1, 4), "_pop_weighted.csv")
+  new_file_name <- paste0(substr(nc_file_name, 28, 30), "_pop_weighted.csv")
 
 
   # pivot into long-form tables
   long_2000 <- weighted_extract_2000 %>%
     pivot_longer(-c(NUTS_ID),
                             names_to = "date",
-                            values_to = paste0(substr(nc_file_name, 1, 4),
+                            values_to = paste0(substr(nc_file_name, 28, 30),
                                                "_pop_weighted")) %>%
     mutate(date = str_replace(date, "weighted_mean\\.", ""))
   
   long_2005 <- weighted_extract_2005 %>%
     pivot_longer(-c(NUTS_ID),
                  names_to = "date",
-                 values_to = paste0(substr(nc_file_name, 1, 4),
+                 values_to = paste0(substr(nc_file_name, 28, 30),
                                     "_pop_weighted")) %>%
     mutate(date = str_replace(date, "weighted_mean\\.", ""))
   
   long_2010 <- weighted_extract_2010 %>%
     pivot_longer(-c(NUTS_ID),
                  names_to = "date",
-                 values_to = paste0(substr(nc_file_name, 1, 4),
+                 values_to = paste0(substr(nc_file_name, 28, 30),
                                     "_pop_weighted")) %>%
     mutate(date = str_replace(date, "weighted_mean\\.", ""))
   
   long_2015 <- weighted_extract_2015 %>%
     pivot_longer(-c(NUTS_ID),
                  names_to = "date",
-                 values_to = paste0(substr(nc_file_name, 1, 4),
+                 values_to = paste0(substr(nc_file_name, 28, 30),
                                     "_pop_weighted")) %>%
     mutate(date = str_replace(date, "weighted_mean\\.", ""))
   
   long_2020 <- weighted_extract_2020 %>%
     pivot_longer(-c(NUTS_ID),
                  names_to = "date",
-                 values_to = paste0(substr(nc_file_name, 1, 4),
+                 values_to = paste0(substr(nc_file_name, 28, 30),
                                     "_pop_weighted")) %>%
     mutate(date = str_replace(date, "weighted_mean\\.", ""))
   
@@ -249,10 +249,15 @@ nuts2_temp.df <- left_join(nuts2_temp.df, process_nuts2_files.lst[[3]],
 ## clean and rename any variables -------------
 # renaming temperature variables
 nuts2_temp.df = nuts2_temp.df %>% 
-  rename(temp_max_pop_weighted = tmax_pop_weighted,
-         temp_mean_pop_weighted = tmea_pop_weighted,
-         temp_min_pop_weighted = tmin_pop_weighted)
+  rename(temp_max_pop_weighted = max_pop_weighted,
+         temp_mean_pop_weighted = mea_pop_weighted,
+         temp_min_pop_weighted = min_pop_weighted)
 
+# convert to celcius
+nuts2_temp.df = nuts2_temp.df %>% 
+  mutate(temp_max_pop_weighted = temp_max_pop_weighted - 273.15,
+         temp_mean_pop_weighted = temp_mean_pop_weighted - 273.15,
+         temp_min_pop_weighted = temp_min_pop_weighted - 273.15)
 
 ## save NUTS2 -------------------------
 write.csv(nuts2_temp.df, file = export_nuts2)
@@ -352,42 +357,42 @@ for (nc_file in nc_files.lst) {
   
   # Generate a unique filename for each .nc file's output (min, max, mean)
   nc_file_name <- basename(nc_file)
-  new_file_name <- paste0(substr(nc_file_name, 1, 4), "_pop_weighted.csv")
+  new_file_name <- paste0(substr(nc_file_name, 28, 30), "_pop_weighted.csv")
   
   
   # pivot into long-form tables
   long_2000 <- weighted_extract_2000 %>%
     pivot_longer(-c(NUTS_ID),
                  names_to = "date",
-                 values_to = paste0(substr(nc_file_name, 1, 4),
+                 values_to = paste0(substr(nc_file_name, 28, 30),
                                     "_pop_weighted")) %>%
     mutate(date = str_replace(date, "weighted_mean\\.", ""))
   
   long_2005 <- weighted_extract_2005 %>%
     pivot_longer(-c(NUTS_ID),
                  names_to = "date",
-                 values_to = paste0(substr(nc_file_name, 1, 4),
+                 values_to = paste0(substr(nc_file_name, 28, 30),
                                     "_pop_weighted")) %>%
     mutate(date = str_replace(date, "weighted_mean\\.", ""))
   
   long_2010 <- weighted_extract_2010 %>%
     pivot_longer(-c(NUTS_ID),
                  names_to = "date",
-                 values_to = paste0(substr(nc_file_name, 1, 4),
+                 values_to = paste0(substr(nc_file_name, 28, 30),
                                     "_pop_weighted")) %>%
     mutate(date = str_replace(date, "weighted_mean\\.", ""))
   
   long_2015 <- weighted_extract_2015 %>%
     pivot_longer(-c(NUTS_ID),
                  names_to = "date",
-                 values_to = paste0(substr(nc_file_name, 1, 4),
+                 values_to = paste0(substr(nc_file_name, 28, 30),
                                     "_pop_weighted")) %>%
     mutate(date = str_replace(date, "weighted_mean\\.", ""))
   
   long_2020 <- weighted_extract_2020 %>%
     pivot_longer(-c(NUTS_ID),
                  names_to = "date",
-                 values_to = paste0(substr(nc_file_name, 1, 4),
+                 values_to = paste0(substr(nc_file_name, 28, 30),
                                     "_pop_weighted")) %>%
     mutate(date = str_replace(date, "weighted_mean\\.", ""))
   
@@ -425,10 +430,15 @@ nuts3_temp.df <- left_join(nuts3_temp.df, process_nuts3_files.lst[[3]],
 ## clean and rename any variables -------------
 # renaming temperature variables
 nuts3_temp.df = nuts3_temp.df %>% 
-  rename(temp_max_pop_weighted = tmax_pop_weighted,
-         temp_mean_pop_weighted = tmea_pop_weighted,
-         temp_min_pop_weighted = tmin_pop_weighted)
+  rename(temp_max_pop_weighted = max_pop_weighted,
+         temp_mean_pop_weighted = mea_pop_weighted,
+         temp_min_pop_weighted = min_pop_weighted)
 
+# convert to celcius
+nuts3_temp.df = nuts3_temp.df %>% 
+  mutate(temp_max_pop_weighted = temp_max_pop_weighted - 273.15,
+         temp_mean_pop_weighted = temp_mean_pop_weighted - 273.15,
+         temp_min_pop_weighted = temp_min_pop_weighted - 273.15)
 
 ## save NUTS3 [PATH TO BE UPDATED] -------------------------
 write.csv(nuts3_temp.df, file = export_nuts3)

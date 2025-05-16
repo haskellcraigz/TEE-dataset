@@ -1,6 +1,6 @@
 ################################################
 ## Constructing UTCI heat stress days 
-## Date Last Modified: Dec 13 2024 
+## Date Last Modified: May 16 2025
 ###############################################
 ## NOTES: (1) UTCI data only available 1980 - 2020
 ## (2) UTCI of at least 26 C is moderate heat stress while a UTCI
@@ -8,12 +8,16 @@
 
 
 
-# Packages [FILE PATH UPDATED] ----------------
+# Packages ----------------
 library(tidyverse)
 
+# set working directory to TEE-dataset-main folder
+setwd("")
+
+
 # Load data [FILE PATH UPDATED] ---------------
-data_nuts2 <- read.csv(file = "~/TEEDataset/data/02_metrics/dailyutci_nuts2.csv")
-data_nuts3 <- read_csv(file = "~/TEEDataset/data/02_metrics/dailyutci_nuts3.csv")
+data_nuts2 <- read.csv(file = "data/02_metrics/dailyutci_nuts2.csv")
+data_nuts3 <- read_csv(file = "data/02_metrics/dailyutci_nuts3.csv")
 
 
 # Reshape data frames and add heat stress column ----------------------------------
@@ -59,11 +63,11 @@ data_nuts3_processed <- data_nuts3 %>%
 # Save [UPDATE FILE PATHS] ---------------------
 
 write_csv(data_nuts2_processed, 
-          file = "~/TEEDataset/data/02_metrics/utciyearly_nuts2.csv")
+          file = "data/02_metrics/utciyearly_nuts2.csv")
 
 
 write_csv(data_nuts3_processed, 
-          file = "~/TEEDataset/data/02_metrics/utciyearly_nuts3.csv")
+          file = "data/02_metrics/utciyearly_nuts3.csv")
 
 
 

@@ -1,15 +1,18 @@
 #########################################
 ## Produce teeyearly: yearly metrics 1980-2021
-## Last Modified: Dec 13 2024
+## Last Modified: May 16 2025
 ########################################
 
 # Packages ---------------
 
 library(tidyverse)
 
+# set working directory to TEE-dataset-main folder
+setwd("")
+
 # Load data [UPDATE FILE PATH] --------------
 
-files <- list.files(path = "~/TEEDataset/data/02_metrics/", full.names = TRUE)
+files <- list.files(path = "data/02_metrics/", full.names = TRUE)
 
 metrics_c <- c("cdd", "utciyearly", "expected_threshold", "percentilethreshold",
                "tropical_nights")
@@ -53,6 +56,7 @@ for (f in files){
     
   }
 }
+
 
 
 
@@ -154,13 +158,14 @@ df_nuts3 <- df_nuts3 %>%
   arrange(nuts_id, year)
 
 
-
-
+# dropping islands
+df_nuts2 <- na.omit(df_nuts2)
+df_nuts3 <- na.omit(df_nuts3)
 
 
 # save [FILE PATHS TO BE UPDATED] ----------------------------
 
 write_csv(df_nuts2, 
-          "~/TEEDataset/data/03_fulldatasets/teeyearly_nuts2.csv")
+          "data/03_fulldatasets/teeyearly_nuts2.csv")
 write_csv(df_nuts3, 
-          "~/TEEDataset/data/03_fulldatasets/teeyearly_nuts3.csv")
+          "data/03_fulldatasets/teeyearly_nuts3.csv")

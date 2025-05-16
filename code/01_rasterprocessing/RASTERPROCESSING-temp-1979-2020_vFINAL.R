@@ -1,6 +1,6 @@
 #########################################################
 # Batch processing daily temp min, mean, and max 1979-2021
-# Last Updated: Dec 13 2024
+# Last Updated: May 16 2025
 ############################################################
 ## NOTES: 
 
@@ -9,8 +9,9 @@
 # ---------------------------------------------------------------------------- #
 
 # --- set working directory
-# set working directory to location of TEEFiles folder
-# setwd()
+# set working directory to TEE-dataset-main folder
+
+setwd("")
 
 # --- libraries
 
@@ -25,19 +26,21 @@ library(sf)
 library(tidyverse)
 
 # --- shapefiles
+
 # download nuts files located in data/01_rawdata/nuts/:
-spdf <- st_read("")
+spdf <- st_read("data/01_rawdata/nuts/NUTS_RG_10M_2021_4326.shp")
 
 # --- initalize values
 
 # filepaths
-base_path <- "~/data/01_rawdata/dailytemp/"
-export_nuts2 <- "~/data/02_metrics/dailytemp_nuts2.csv"
-export_nuts3 <- "~/data/02_metrics/dailytemp_nuts3.csv"
+base_path <- "data/01_rawdata/dailytemp/"
+export_nuts2 <- "data/02_metrics/dailytemp_nuts2.csv"
+export_nuts3 <- "data/02_metrics/dailytemp_nuts3.csv"
 
 # year
-startdate <- "1979-01-01"
-enddate <- "2020-12-31"
+startdate <- "1950-01-01"
+enddate <- "2024-12-31"
+
 
 # ---------------------------------------------------------------------------- #
 # Step 1: Subset Shapefile Regions -------------------------------------------
@@ -90,7 +93,7 @@ for (nc_file in nc_files.lst) {
   basename(nc_file)
   
   # Create a sequence of dates for entire file period to feed to raster data
-  dates <- seq(as.Date(startdate, "%Y-%m-%d"), as.Date(enddate, "%Y-%m-%d"), by = "day")
+  dates <- seq(as.Date(startdate, "%Y-%m-%d"), as.Date(enddate, "%Y-%m-%d"), by = "days")
   
   # add the dates 
   names(raster) <- dates
@@ -100,7 +103,7 @@ for (nc_file in nc_files.lst) {
   
   # Generate a unique filename for each .nc file's output
   nc_file_name <- basename(nc_file)
-  new_file_name <- paste0(substr(nc_file_name, 1, 4), ".csv")
+  new_file_name <- str_sub(nc_file_name, 28, 30)
   
   # spatial mean
   extracted <- exact_extract(raster, spdf_crs, 'mean', 
@@ -141,11 +144,14 @@ for (i in 3:length(process_nuts2_files.lst)){
 }
 
 
-# renaming temperature variables
+# renaming temperature variables & converting to celcius
 nuts2_temp.df = nuts2_temp.df %>% 
-  rename(temp_mean = m_mean.csv,
-         temp_max = m_max_.csv,
-         temp_min = m_min_.csv)
+  rename(temp_mean = m_mea,
+         temp_max = m_max,
+         temp_min = m_min) %>% 
+  mutate(temp_min = temp_min - 273.15) %>% 
+  mutate(temp_mean = temp_mean - 273.15) %>% 
+  mutate(temp_max = temp_max - 273.15)
 
 nuts2_temp.df = nuts2_temp.df %>% 
   mutate(date = str_replace_all(date, "mean.", ""))
@@ -192,7 +198,7 @@ for (nc_file in nc_files.lst) {
   
   # Generate a unique filename for each .nc file's output
   nc_file_name <- basename(nc_file)
-  new_file_name <- paste0(substr(nc_file_name, 1, 3), ".csv")
+  new_file_name <- str_sub(nc_file_name, 28, 30)
   
   # spatial mean
   extracted <- exact_extract(raster, spdf_crs, 'mean', 
@@ -233,11 +239,14 @@ for (i in 3:length(process_nuts3_files.lst)){
 }
 
 
-# renaming temperature variables
+# renaming temperature variables & converting to celcius
 nuts3_temp.df = nuts3_temp.df %>% 
-  rename(temp_mean = m_mea.csv,
-         temp_max = m_max.csv,
-         temp_min = m_min.csv)
+  rename(temp_mean = m_mea,
+         temp_max = m_max,
+         temp_min = m_min) %>% 
+  mutate(temp_min = temp_min - 273.15) %>% 
+  mutate(temp_mean = temp_mean - 273.15) %>% 
+  mutate(temp_max = temp_max - 273.15)
 
 nuts3_temp.df = nuts3_temp.df %>% 
   mutate(date = str_replace_all(date, "mean.", ""))

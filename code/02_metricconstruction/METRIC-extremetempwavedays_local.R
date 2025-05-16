@@ -1,6 +1,6 @@
 ###############################################
 # Constructing Extreme Temperature Waves using Local Threshold
-# Date Last Modified: Dec 13 2024
+# Date Last Modified: May 16 2025
 ################################################
 # NOTES: (1) Following Chambers (2020) definition of heatwave days in a year
 # (2) Reference period can be adjusted by user. Last year of reference period
@@ -8,20 +8,23 @@
 # reference period needs to be adjusted, user can filter the dataset before
 # applying the functions
 
-# Packages [FILE PATH TO BE UPDATED IN FINAL REPO] -------------------
+# Packages -------------------
 library(tidyverse)
 library(zoo)
 
+# set working directory to TEE-dataset-main folder
+setwd("")
+
 # Load data [FILE PATH TO BE UPDATED IN FINAL REPO] --------------------
 ## NUTS3
-data_nuts3 <- read_csv("~/TEEDataset/data/02_metrics/dailytemp_nuts3.csv")
+data_nuts3 <- read_csv("data/02_metrics/dailytemp_nuts3.csv")
 # making year variable
 data_nuts3 <- data_nuts3 %>% 
   mutate(year = str_sub(date, 1, 4))
 
 
 ##NUTS2
-data_nuts2 <- read_csv("~/TEEDataset/data/02_metrics/dailytemp_nuts2.csv")
+data_nuts2 <- read_csv("data/02_metrics/dailytemp_nuts2.csv")
 # making year variable
 data_nuts2 <- data_nuts2 %>% 
   mutate(year = str_sub(date, 1, 4))
@@ -40,8 +43,8 @@ ref_year_first <- 1961
 first_year <- 1979
 
 # export filepaths
-export_nuts2 <- "~/TEEDataset/data/02_metrics/wave_local_nuts2.csv"
-export_nuts3 <- "~/TEEDataset/data/02_metrics/wave_local_nuts3.csv"
+export_nuts2 <- "data/02_metrics/wave_local_nuts2.csv"
+export_nuts3 <- "data/02_metrics/wave_local_nuts3.csv"
 
 # Limit earliest year of data to calculate reference from ------------
 

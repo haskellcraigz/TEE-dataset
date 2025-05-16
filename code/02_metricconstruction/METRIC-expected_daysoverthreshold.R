@@ -1,26 +1,26 @@
 ###############################################
 # Data Paper - (Expected) Days over threshold
-# Date Last Updated: Dec 13 2024
+# Date Last Updated: May 16 2025
 ################################################
 # Notes:
 # 
 
-# Set working directory to TEEDataset folder
-# setwd()
+# set working directory to TEE-dataset-main folder
+setwd("")
 
 # Packages [FILE PATH TO BE UPDATED IN FINAL REPO] -------------------
 library(tidyverse)
 
 # Load data [FILE PATH TO BE UPDATED IN FINAL REPO] --------------------
 ## NUTS3
-data_nuts3 <- read_csv("~/TEEDataset/data/02_metrics/dailytemp_nuts3.csv")
+data_nuts3 <- read_csv("data/02_metrics/dailytemp_nuts3.csv")
 # making year variable
 data_nuts3 <- data_nuts3 %>% 
   mutate(year = str_sub(date, 1, 4))
 
 
 ##NUTS2
-data_nuts2 <- read_csv("~/TEEDataset/data/02_metrics/dailytemp_nuts2.csv")
+data_nuts2 <- read_csv("data/02_metrics/dailytemp_nuts2.csv")
 # making year variable
 data_nuts2 <- data_nuts2 %>% 
   mutate(year = str_sub(date, 1, 4))
@@ -31,11 +31,11 @@ extreme_heat <- seq(20,50, by = 5)
 extreme_cold <- seq(-20,10, by = 5)
 
 # first year of data period
-first_year <- 1979
+first_year <- 1980
 
 # export filepaths
-export_nuts3 <- "~/TEEDataset/data/02_metrics/expected_threshold_nuts3.csv"
-export_nuts2 <- "~/TEEDataset/data/02_metrics/expected_threshold_nuts2.csv"
+export_nuts3 <- "data/02_metrics/expected_threshold_nuts3.csv"
+export_nuts2 <- "data/02_metrics/expected_threshold_nuts2.csv"
 
 # Compute metric -------------
 
