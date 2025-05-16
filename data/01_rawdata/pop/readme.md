@@ -1,0 +1,1 @@
+Gridded population rasters go here. We use gridded population estimates from the Center For International Earth Science Information Network. These estimates are available at https://doi.org/10.7927/H4JW8BX5. 
