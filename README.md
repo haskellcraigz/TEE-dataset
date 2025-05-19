@@ -18,6 +18,7 @@ Produces three datasets containing measures of extreme temperatures (hot and col
 
 ## Steps
 - Download raw data from the publicly available repositories and save in Data folder
+   - Can download daily temperature and UTCI data from Copernicus using scripts in `00_datadownload/`
 - Run scripts in folder `01_rasterprocessing/` to process raster files and generate daily temperature measures (TEEdaily)
 - Run the following scripts in folder `02_metricconstruction/` to compute yearly temperature measures (used in TEEyearly):
 ```
