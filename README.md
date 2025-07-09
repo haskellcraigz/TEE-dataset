@@ -1,5 +1,7 @@
 # TEE-dataset
-Code for generating the TEE: temperature extremes in Europe dataset.
+Code for generating the TEE: temperature extremes in Europe dataset. TEE datasets can be downloaded on Figshare ([link here](https://springernature.figshare.com/articles/dataset/Temperature_Extremes_in_Europe_TEE_/28063226)). Detailed information on the data generating process and final datasets are [here](https://doi.org/10.1038/s41597-025-05352-7).
+
+**Recommended Citation**: Ronnkvist, S.R., Haskell-Craig, Z., Robinson, A., Conte Keivabu, R., Hauer, M.E., Bovienzo, D., & Zagheni, E. (2025) What’s the TEE: Metrics of Temperature Extremes in Europe NUTS Regions (1980-2024). *Scientific Data*. [https://doi.org/10.1038/s41597-025-05352-7](https://doi.org/10.1038/s41597-025-05352-7)
 
 ## Abstract
 
