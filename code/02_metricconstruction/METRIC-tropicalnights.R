@@ -11,8 +11,8 @@
 library(tidyverse)
 library(zoo)
 
-# set working directory to TEE-dataset-main folder
-setwd("")
+# if needed, set working directory to TEE-dataset-main folder using below command
+# setwd("")
 
 # Load data [FILE PATH TO BE UPDATED IN FINAL REPO] --------------------
 ## NUTS3
@@ -126,6 +126,7 @@ write_csv(yearly_nuts2, file = export_nuts2)
 
 
 write_csv(yearly_nuts3, file = export_nuts3)
+
 
 
 
