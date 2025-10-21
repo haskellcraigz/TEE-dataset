@@ -9,8 +9,8 @@
 ## Note - this metric is used particularly when considering the impact of
 ## temperature on energy use/the electrical grid
 
-# set working directory to TEE-dataset-main folder
-setwd("")
+# if needed, set working directory to TEE-dataset-main folder using below command
+# setwd("")
 
 # Packages [FILE PATH TO BE UPDATED IN FINAL REPO] -------------------
 library(tidyverse)
@@ -111,6 +111,7 @@ write_csv(yearly_nuts2, file = export_nuts2)
 
 
 write_csv(yearly_nuts3, file = export_nuts3)
+
 
 
 
