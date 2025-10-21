@@ -8,8 +8,8 @@
 # Set-up ----------------------------------------------------------------------
 # ---------------------------------------------------------------------------- #
 
-# set working directory to TEE-dataset-main folder
-setwd()
+# if needed, set working directory to TEE-dataset-main folder using below command
+# setwd("")
 
 # --- libraries
 
@@ -442,6 +442,7 @@ nuts3_temp.df = nuts3_temp.df %>%
 
 ## save NUTS3 [PATH TO BE UPDATED] -------------------------
 write.csv(nuts3_temp.df, file = export_nuts3)
+
 
 
 
