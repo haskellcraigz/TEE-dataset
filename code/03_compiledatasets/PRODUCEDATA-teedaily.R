@@ -8,8 +8,8 @@
 
 library(tidyverse)
 
-# set working directory to TEE-dataset-main folder
-setwd("")
+# if needed, set working directory to TEE-dataset-main folder using below command
+# setwd("")
 
 # Load data --------------
 ## daily temperature for entire period
@@ -221,6 +221,7 @@ data_nuts3_2020 = data_nuts3 %>%
 write.csv(data_nuts3_2020, file = "data/03_fulldatasets/teedaily_nuts3_2020-2024.csv")
 
 rm(data_nuts3_2020)
+
 
 
 
