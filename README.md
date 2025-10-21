@@ -38,6 +38,11 @@ Shapefile polygons delineating the European NUTS regions are available from [Eur
 
 Gridded population estimates were produced by the Center For International Earth Science Information Network available at the [Gridded Population of the World, Version 4 (GPWv4): Population Count, Revision 11](https://doi.org/10.7927/H4JW8BX5) 
 
+## Replicating code for other regions or metrics
+
+While we only publish data for Europe, our code can be easily adapted to compute temperature extremes for other regions or at different spatial scales. One caveat is that users must have access to high throughput computing to process raster data. Since we used global raster data, the primary alteration to our code is changing the shapefile and associated variables (e.g. spatial unit identifier) used to compute spatial means. Other minor revisions to the code include changing the names of output files and variable names. Users wishing to generate metrics for different time spans must also change the time frame listed in the SET UP section in each code file. Users may also wish to use a different measure of daily temperature to construct yearly temperature metrics. Since we generated daily measures of the minimum, mean, and maximum temperature, users can simply switch the temperature variable used in the metric construction.
+
+
 
 ## R environment
 ```
