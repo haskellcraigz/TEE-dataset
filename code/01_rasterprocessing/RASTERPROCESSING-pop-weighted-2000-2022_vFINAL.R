@@ -31,7 +31,7 @@ library(lubridate)
 
 # Init values ------------------------
 
-# years of the temperature raster data
+# years of the temperature raster data (change dates if you pull different years of data)
 startdate <- "1950-01-01"
 enddate <- "2024-12-31"
 
@@ -442,6 +442,7 @@ nuts3_temp.df = nuts3_temp.df %>%
 
 ## save NUTS3 [PATH TO BE UPDATED] -------------------------
 write.csv(nuts3_temp.df, file = export_nuts3)
+
 
 
 
