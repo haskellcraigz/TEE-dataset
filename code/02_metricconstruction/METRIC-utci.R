@@ -11,8 +11,8 @@
 # Packages ----------------
 library(tidyverse)
 
-# set working directory to TEE-dataset-main folder
-setwd("")
+# if needed, set working directory to TEE-dataset-main folder using below command
+# setwd("")
 
 
 # Load data [FILE PATH UPDATED] ---------------
@@ -68,6 +68,7 @@ write_csv(data_nuts2_processed,
 
 write_csv(data_nuts3_processed, 
           file = "data/02_metrics/utciyearly_nuts3.csv")
+
 
 
 
