@@ -3,6 +3,7 @@
 # --- set working directory 
 
 # set working directory to TEE-dataset-main folder
+# --- to use the command, insert the filepath between the "" (e.g. setwd("Documents/TEE-dataset-main/"))
 setwd("")
 
 # --- run files
@@ -53,4 +54,5 @@ source("code/03_compiledatasets/PRODUCEDATA-teeyearly.R")
 rm(list=ls())
 
 source("code/03_compiledatasets/PRODUCEDATA-teewave.R")
+
 rm(list=ls())
