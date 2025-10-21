@@ -8,8 +8,8 @@
 
 library(tidyverse)
 
-# set working directory to TEE-dataset-main folder
-setwd("")
+# if needed, set working directory to TEE-dataset-main folder using below command
+# setwd("")
 
 # Load data --------------
 
@@ -66,3 +66,4 @@ wave_nuts3 = wave_nuts3 %>%
   filter(wavelength > 1)
 
 write.csv(wave_nuts3, "data/03_fulldatasets/teewave_nuts3.csv")
+
