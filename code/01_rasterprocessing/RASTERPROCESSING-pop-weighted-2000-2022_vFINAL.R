@@ -2,7 +2,9 @@
 # Pop. weighted batch processing daily temp min, mean, and max 1950-2023 
 # Last Updated: May 16 2025
 ############################################################
-## NOTES: see GPW_v4 contents file for explanation of each layer
+## NOTE 1: see GPW_v4 contents file for explanation of each layer
+## NOTE 2: If you use a different time frame, you will need to revise the
+## ---------- script by removing code for years not included in your data
 
 # ---------------------------------------------------------------------------- #
 # Set-up ----------------------------------------------------------------------
@@ -442,6 +444,7 @@ nuts3_temp.df = nuts3_temp.df %>%
 
 ## save NUTS3 [PATH TO BE UPDATED] -------------------------
 write.csv(nuts3_temp.df, file = export_nuts3)
+
 
 
 
