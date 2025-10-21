@@ -7,8 +7,8 @@
 # Packages] -------------------
 library(tidyverse)
 
-# set working directory to TEE-dataset-main folder
-setwd("")
+# if needed, set working directory to TEE-dataset-main folder using below command
+# setwd("")
 
 
 # Load data  --------------------
@@ -154,5 +154,6 @@ data_nuts3 <- data_nuts3 %>%
   unique()
 
 ### save ----------------
+
 
 write_csv(data_nuts3, file = export_nuts3)
