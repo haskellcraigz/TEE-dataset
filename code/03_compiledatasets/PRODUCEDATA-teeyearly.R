@@ -7,8 +7,8 @@
 
 library(tidyverse)
 
-# set working directory to TEE-dataset-main folder
-setwd("")
+# if needed, set working directory to TEE-dataset-main folder using below command
+# setwd("")
 
 # Load data [UPDATE FILE PATH] --------------
 
@@ -169,3 +169,4 @@ write_csv(df_nuts2,
           "data/03_fulldatasets/teeyearly_nuts2.csv")
 write_csv(df_nuts3, 
           "data/03_fulldatasets/teeyearly_nuts3.csv")
+
