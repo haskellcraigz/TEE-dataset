@@ -9,8 +9,8 @@
 # ---------------------------------------------------------------------------- #
 
 # --- set working directory
-# set working directory to TEE-dataset-main folder
-setwd()
+# if needed, set working directory to TEE-dataset-main folder using below command
+# setwd("")
 
 # -- libraries
 # raster packages
@@ -263,4 +263,5 @@ utci_nuts3 = utci_nuts3 %>%
 
 # Export data
 write.csv(utci_nuts3, file = export_nuts3)
+
 
