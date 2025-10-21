@@ -5,8 +5,8 @@
 # Notes:
 # 
 
-# set working directory to TEE-dataset-main folder
-setwd("")
+# if needed, set working directory to TEE-dataset-main folder using below command
+# setwd("")
 
 # Packages [FILE PATH TO BE UPDATED IN FINAL REPO] -------------------
 library(tidyverse)
@@ -298,4 +298,5 @@ write_csv(all_nuts2, file = export_nuts2)
 
 
 write_csv(all_nuts3, file = export_nuts3)
+
 
