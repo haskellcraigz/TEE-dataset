@@ -12,8 +12,8 @@
 library(tidyverse)
 library(zoo)
 
-# set working directory to TEE-dataset-main folder
-setwd("")
+# if needed, set working directory to TEE-dataset-main folder using below command
+# setwd("")
 
 # Load data [FILE PATH TO BE UPDATED IN FINAL REPO] --------------------
 ## NUTS3
@@ -323,4 +323,5 @@ wave_nuts3 <- remove_rownames(wave_nuts3)
 
 ### save [UPDATE PATHS FOR FINAL REPO] ----------------------------
 write_csv(wave_nuts3, file = export_nuts3)
+
 
