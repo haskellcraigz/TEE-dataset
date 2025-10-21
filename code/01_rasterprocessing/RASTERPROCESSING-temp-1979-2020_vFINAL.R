@@ -37,7 +37,7 @@ base_path <- "data/01_rawdata/dailytemp/"
 export_nuts2 <- "data/02_metrics/dailytemp_nuts2.csv"
 export_nuts3 <- "data/02_metrics/dailytemp_nuts3.csv"
 
-# year
+# date range (change dates if you pull different years of data)
 startdate <- "1950-01-01"
 enddate <- "2024-12-31"
 
@@ -253,4 +253,5 @@ nuts3_temp.df = nuts3_temp.df %>%
 
 # exporting
 write.csv(nuts3_temp.df, export_nuts3)
+
 
