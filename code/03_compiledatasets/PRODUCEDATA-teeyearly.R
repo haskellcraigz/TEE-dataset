@@ -2,6 +2,7 @@
 ## Produce teeyearly: yearly metrics 1980-2021
 ## Last Modified: May 16 2025
 ########################################
+## NOTES: If you change the temporal or spatial scale, some columns may not be in the dataset.
 
 # Packages ---------------
 
@@ -169,4 +170,5 @@ write_csv(df_nuts2,
           "data/03_fulldatasets/teeyearly_nuts2.csv")
 write_csv(df_nuts3, 
           "data/03_fulldatasets/teeyearly_nuts3.csv")
+
 
