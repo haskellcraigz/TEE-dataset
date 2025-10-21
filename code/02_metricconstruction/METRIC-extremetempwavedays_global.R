@@ -7,8 +7,8 @@
 # reference period needs to be adjusted, user can filter the dataset before
 # applying the functions
 
-# set working directory to TEE-dataset-main folder
-setwd("")
+# if needed, set working directory to TEE-dataset-main folder using below command
+# setwd("")
 
 # Packages -------------------
 library(tidyverse)
@@ -279,4 +279,5 @@ wave_nuts3 <- remove_rownames(wave_nuts3)
 ### save ----------------------------
 write_csv(wave_nuts3, file = export_nuts3)
  
+
 
