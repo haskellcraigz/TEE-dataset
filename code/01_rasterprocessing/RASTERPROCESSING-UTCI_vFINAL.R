@@ -37,7 +37,7 @@ nc_files.lst <- list.files(path = "data/01_rawdata/utci/",
 
 # -- initializing values 
 
-# time frame
+# time frame (change dates if you pull different years of data)
 startdate <- "1979-01-01"
 enddate <- "2024-12-31"
 
@@ -263,3 +263,4 @@ utci_nuts3 = utci_nuts3 %>%
 
 # Export data
 write.csv(utci_nuts3, file = export_nuts3)
+
